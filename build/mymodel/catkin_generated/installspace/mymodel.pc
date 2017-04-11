@@ -1,0 +1,8 @@
+prefix=/home/cho/catkin_ws/install
+
+Name: mymodel
+Description: Description of mymodel
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/cho/catkin_ws/install/lib 
+Requires: 
