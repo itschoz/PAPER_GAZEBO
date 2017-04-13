@@ -1,0 +1,61 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Created on Jan 10 11:16:00 2014
+@author: Sam Pfeiffer
+Snippet of code on how to send a navigation goal and how to get the current robot position in map
+Navigation actionserver: /move_base/goal
+Type of message: move_base_msgs/MoveBaseActionGoal
+Actual robot pose topic: /amcl_pose
+Type of message: geometry_msgs/PoseWithCovarianceStamped
+"""
+
+import rospy
+import actionlib
+from std_msgs.msg import Int64
+from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
+from nav_msgs.msg import Odometry
+from geometry_msgs.msg import PoseWithCovarianceStamped, Quaternion
+from tf.transformations import quaternion_from_euler, euler_from_quaternion
+from math import radians, degrees
+import time
+
+def create_nav_goal(data_odom):
+    """Create a MoveBaseGoal with x, y position and yaw rotation (in degrees).
+    Returns a MoveBaseGoal"""
+    print "Attack has been detected!!!!!"
+#    x = data_odom.pose.pose.position.x + 3
+    X = 0
+#    y = data_odom.pose.pose.position.y + 3
+    Y = 0
+    yaw = 0
+    mb_goal = MoveBaseGoal()
+    mb_goal.target_pose.header.frame_id = '/map' # Note: the frame_id must be map
+    mb_goal.target_pose.pose.position.x = x
+    mb_goal.target_pose.pose.position.y = y
+    mb_goal.target_pose.pose.position.z = 0.0 # z must be 0.0 (no height in the map)
+    
+    # Orientation of the robot is expressed in the yaw value of euler angles
+    #angle = radians(yaw) # angles are expressed in radians
+    angle = 1
+    quat = quaternion_from_euler(0.0, 0.0, angle) # roll, pitch, yaw
+    mb_goal.target_pose.pose.orientation = Quaternion(*quat.tolist())
+    nav_as.send_goal(mb_goal)
+    nav_as.wait_for_result()
+
+
+def callback_pose(data):
+        rospy.Subscriber("/odom",Odometry,create_nav_goal)
+	#rospy.Subscriber("/amcl_pose", PoseWithCovarianceStamped, callback_pose)
+	
+if __name__=='__main__':
+    rospy.init_node("navigation_snippet22222")
+    nav_as = actionlib.SimpleActionClient('/move_base', MoveBaseAction)
+    
+    nav_as.wait_for_server()
+
+    print "MANIPULATED WAYPOINT AFTER ATTACK"
+    # Read the current pose topic
+    rospy.Subscriber("/detector", Int64, callback_pose)
+    rospy.spin()
+    

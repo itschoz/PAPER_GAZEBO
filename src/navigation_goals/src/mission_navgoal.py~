@@ -232,6 +232,8 @@ if __name__=='__main__':
     rospy.loginfo("Waiting for result...")
     nav_as.wait_for_result()
 
+
+
     #Mission 4.4
     rospy.loginfo("Creating navigation goal...")
     nav_goal = create_nav_goal(-6.5, 3.16, 0.0)
@@ -241,20 +243,20 @@ if __name__=='__main__':
     nav_as.wait_for_result()
 
     #Mission 4.4
- #   rospy.loginfo("Creating navigation goal...")
- #   nav_goal = create_nav_goal(-1, 4, 0.0)
- #   rospy.loginfo("Sending goal to x=-9.0 y=5.0 yaw=0...")
- #   nav_as.send_goal(nav_goal)
- #   rospy.loginfo("Waiting for result...")
- #   nav_as.wait_for_result()
+    rospy.loginfo("Creating navigation goal...")
+    nav_goal = create_nav_goal(-1, 4, 0.0)
+    rospy.loginfo("Sending goal to x=-9.0 y=5.0 yaw=0...")
+    nav_as.send_goal(nav_goal)
+    rospy.loginfo("Waiting for result...")
+    nav_as.wait_for_result()
 
     #Mission 4.4
-#    rospy.loginfo("Creating navigation goal...")
-#    nav_goal = create_nav_goal(5.138, 4.34, 0.0)
-#    rospy.loginfo("Sending goal to x=-9.0 y=5.0 yaw=0...")
-#    nav_as.send_goal(nav_goal)
-#    rospy.loginfo("Waiting for result...")
-#    nav_as.wait_for_result()
+    rospy.loginfo("Creating navigation goal...")
+    nav_goal = create_nav_goal(5.138, 4.34, 0.0)
+    rospy.loginfo("Sending goal to x=-9.0 y=5.0 yaw=0...")
+    nav_as.send_goal(nav_goal)
+    rospy.loginfo("Waiting for result...")
+    nav_as.wait_for_result()
 
 
 
